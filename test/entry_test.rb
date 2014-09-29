@@ -10,7 +10,7 @@ class EntryTest < MiniTest::Test
       first_Name: 'Allison',
       last_Name: 'Nguyen',
       Email_Address: 'arannon@jumpstartlab.com',
-      HomePhone: '6154385000',Street: '3155 19th St NW',
+      HomePhone: '6154385000', Street: '3155 19th St NW',
       City: 'Washington',
       State: 'DC',
       Zipcode: '20010'

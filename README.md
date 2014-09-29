@@ -1,4 +1,4 @@
-eventreporter
+Event Reporter
 =============
 
 Turing EventReporter Project

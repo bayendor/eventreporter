@@ -16,7 +16,7 @@ class Repository
   end
 
   def find_by_last_name(name)
-    entries.select { |entry| entry.last_name == name }
+    entries.select { |entry| entry.last_name.downcase == name.downcase }
   end
 
   def find_by_zipcode(zipcode)

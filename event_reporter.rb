@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require_relative 'lib/cli'
-CLI.new.start
+CLI.new($stdout).start

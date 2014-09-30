@@ -4,9 +4,9 @@ require_relative 'event_reporter'
 class CLI
   attr_reader :command, :printer
 
-  def initialize
+  def initialize(output_stream)
     @command = ""
-    @printer = MessagePrinter.new
+    @printer = MessagePrinter.new(output_stream)
   end
 
   def start

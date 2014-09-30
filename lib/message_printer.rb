@@ -1,13 +1,17 @@
 require './lib/repository'
 #?
 class MessagePrinter
+  def initialize(output_stream)
+    @output_stream = output_stream
+  end
+
   def intro
-    puts "Welcome to Event Reporter."
+    @output_stream.puts "Welcome to Event Reporter."
     program_instructions
   end
 
   def program_instructions
-    puts "Would you like to (l)oad a file, ask for (h)elp, or (q)uit?"
+    @output_stream.puts "Would you like to (l)oad a file, ask for (h)elp, or (q)uit?"
   end
 
   def command_request
@@ -15,28 +19,28 @@ class MessagePrinter
   end
 
   def igor_help
-    puts "Intro to basic help... Will be expanded later. Ex. Search [help] [topic]..."
+    @output_stream.puts "Intro to basic help... Will be expanded later. Ex. Search [help] [topic]..."
   end
 
   def ending
-    puts "Goodbye."
+    @output_stream.puts "Goodbye."
   end
 
   def igor_intro
-    puts "Use Entry Reporter to do blah blah blah..."
+    @output_stream.puts "Use Entry Reporter to do blah blah blah..."
   end
 
   def igor_quit
-    puts "Exiting queue."
+    @output_stream.puts "Exiting queue."
     program_instructions
   end
 
   def not_a_valid_command
     if command = "q" || "quit"
-      puts "Thanks for using Event Manager."
+      @output_stream.puts "Thanks for using Event Manager."
       exit
     else
-    puts "That's not a valid command."
+      @output_stream.puts "That's not a valid command."
     end
   end
 

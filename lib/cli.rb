@@ -13,15 +13,13 @@ class CLI
     printer.intro
     until finished?
       printer.command_request
-      @command = gets.strip
-      process_initial_commands
+      process_command(gets.strip)
     end
     printer.ending
   end
 
-  private
-
-  def process_initial_commands
+  def process_command(command)
+    @command = command
     case
     when load?
       igor = Igor.new(printer)
@@ -33,6 +31,9 @@ class CLI
       printer.not_a_valid_command
     end
   end
+
+  private
+
 
   def load?
     command == "l" || command == "load"

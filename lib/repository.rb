@@ -1,29 +1,48 @@
 require 'csv'
-require_relative 'entry'
+require_relative 'igor'
 
 class Repository
-  attr_reader :entries
+  attr_reader :command, :printer
 
-  def self.load_entries(directory)
-    file = File.join(directory, 'event_attendees.csv')
-    data = CSV.open(file, headers: true, header_converters: :symbol)
-    rows = data.collect { |row| Entry.new(row) }
-    new(rows)
+  def initialize
+    @command = ""
+    @printer = MessagePrinter.new
   end
 
-  def initialize(entries)
-    @entries = entries
+  def start
+    printer.intro
+    until finished?
+      printer.command_request
+      @command = gets.strip
+      process_initial_commands
+    end
+    printer.ending
   end
 
-  def find_by_last_name(name)
-    entries.select { |entry| entry.last_name == name }
+  private
+
+  def process_initial_commands
+    case
+    when load?
+      igor = Igor.new(printer)
+      #need a new name for queue since you cannot have a queue class without breaking Ruby (says Herbert)
+      igor.load
+    when help?
+      printer.igor_help
+    else
+      printer.not_a_valid_command
+    end
   end
 
-  def find_by_zipcode(zipcode)
-    entries.select { |entry| entry.zipcode == zipcode }
+  def load?
+    command == "l" || command == "load"
   end
 
-  def find_by_state(state)
-    entries.select { |entry| entry.state == state }
+  def help?
+    command == "h" || command == "help"
+  end
+
+  def finished?
+    command == "q" || command == "quit"
   end
 end

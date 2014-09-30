@@ -1,4 +1,5 @@
 require_relative 'message_printer'
+require_relative 'event_reporter'
 
 class CLI
   attr_reader :command, :printer

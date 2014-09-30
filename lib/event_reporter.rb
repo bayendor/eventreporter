@@ -1,8 +1,4 @@
-#!/usr/bin/env ruby
-
-Dir['./lib/*.rb'].each { |file| require file }
-
-# CLI.new.start
+require_relative 'repository'
 
 class EventReporter
   attr_reader :repository

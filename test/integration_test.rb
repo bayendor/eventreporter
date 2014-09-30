@@ -1,7 +1,7 @@
 gem 'minitest', '~> 5.4'
 require 'minitest/autorun'
 
-require_relative '../lib/eventreporter'
+require_relative '../lib/event_reporter'
 
 class IntegrationTest < Minitest::Test
   def test_lookup_by_last_name

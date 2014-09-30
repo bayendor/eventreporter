@@ -5,7 +5,7 @@ class Repository
   attr_reader :entries
 
   def self.load_entries(directory)
-    file = File.join(directory, 'event_attendees.csv')
+    file = File.join(directory, 'event_test.csv')
     data = CSV.open(file, headers: true, header_converters: :symbol)
     rows = data.collect { |row| Entry.new(row) }
     new(rows)

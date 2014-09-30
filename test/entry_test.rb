@@ -7,10 +7,10 @@ class EntryTest < MiniTest::Test
   def test_entry_attributes
     data = {
       RegDate: '11/12/08 10:47',
-      first_Name: 'Allison',
-      last_Name: 'Nguyen',
-      Email_Address: 'arannon@jumpstartlab.com',
-      HomePhone: '6154385000', Street: '3155 19th St NW',
+      first_name: 'Allison',
+      last_name: 'Nguyen',
+      email_address: 'arannon@jumpstartlab.com',
+      homephone: '6154385000', Street: '3155 19th St NW',
       City: 'Washington',
       State: 'DC',
       Zipcode: '20010'

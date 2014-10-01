@@ -1,40 +1,50 @@
 require_relative 'test_helper'
-
-require_relative '../lib/event_reporter'
+require_relative '../lib/repository'
+require_relative '../lib/file_handler'
 
 class IntegrationTest < Minitest::Test
   def test_lookup_by_last_name
-    repo = EventReporter.new
+    handler = FileHandler.new('data', 'event_test.csv')
+    entries = handler.entries
+    repo = Repository.new(entries)
 
-    repo.lookup('Hankins').sort_by { |e| e.last_name }
-    assert_equal 1, repo.find_count
+    repo.find_by('last_name', 'Hankins').sort_by { |e| e.last_name }
+    assert_equal 1, repo.results_count
   end
 
   def test_lookup_by_zip_code
-    repo = EventReporter.new
+    handler = FileHandler.new('data', 'event_test.csv')
+    entries = handler.entries
+    repo = Repository.new(entries)
 
-    repo.zip_code_lookup('98122').sort_by { |e| e.zipcode }
-    assert_equal 2, repo.find_count
+    repo.find_by('zipcode', '98122').sort_by { |e| e.zipcode }
+    assert_equal 2, repo.results_count
   end
 
   def test_initial_repo_count
-    repo = EventReporter.new
-    assert_equal 0, repo.find_count
+    handler = FileHandler.new('data', 'event_test.csv')
+    entries = handler.entries
+    repo = Repository.new(entries)
+    assert_equal 0, repo.results_count
   end
 
   def test_count_after_lookup
-    repo = EventReporter.new
+    handler = FileHandler.new('data', 'event_test.csv')
+    entries = handler.entries
+    repo = Repository.new(entries)
 
-    repo.zip_code_lookup('98122').sort_by { |e| e.zipcode }
-    assert_equal 2, repo.find_count
+    repo.find_by('zipcode', '98122').sort_by { |e| e.zipcode }
+    assert_equal 2, repo.results_count
   end
 
   def test_count_after_lookup_and_reset
-    repo = EventReporter.new
+    handler = FileHandler.new('data', 'event_test.csv')
+    entries = handler.entries
+    repo = Repository.new(entries)
 
-    repo.zip_code_lookup('98122').sort_by { |e| e.zipcode }
-    assert_equal 2, repo.find_count
-    repo.clear
-    assert_equal 0, repo.find_count
+    repo.find_by('zipcode', '98122').sort_by { |e| e.zipcode }
+    assert_equal 2, repo.results_count
+    repo.results_clear
+    assert_equal 0, repo.results_count
   end
 end

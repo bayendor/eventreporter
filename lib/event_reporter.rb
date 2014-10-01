@@ -1,7 +1,7 @@
 require_relative 'repository'
 
 class EventReporter
-  attr_reader :repository
+  attr_reader :repository, :results
 
   def initialize(repository = Repository.load_entries('./data'))
     @repository = repository
@@ -19,6 +19,14 @@ class EventReporter
 
   def zip_code_lookup(zipcode)
     repository.find_by_zipcode(zipcode)
+  end
+
+  def find_count
+    repository.find_count
+  end
+
+  def clear
+    repository.clear
   end
 
 end

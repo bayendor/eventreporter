@@ -28,5 +28,4 @@ class Repository
   def results_print
 
   end
-
 end

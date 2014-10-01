@@ -18,20 +18,20 @@ class MessagePrinter
     print "Enter your command: "
   end
 
-  def loaded
-    @output_stream.puts "#{@repository} is now loaded."
+  def loaded(filename)
+    @output_stream.puts "#{filename} is now loaded."
   end
 
   def results
     @output_stream.puts "Your search returned X results:"
   end
 
-  def results_cleared
+  def results_clear
     @output_stream.puts "The queue has been cleared."
   end
 
-  def results_count
-    @output_stream.puts "There are X results in the queue."
+  def results_count(count)
+    @output_stream.puts "There are #{count} results in the queue."
   end
 
   def help

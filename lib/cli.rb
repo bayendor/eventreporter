@@ -1,20 +1,21 @@
 require_relative 'message_printer'
 require_relative 'repository'
+require_relative 'file_handler'
 
 class CLI
   attr_reader :command, :printer, :repository, :input
 
   def initialize(output_stream)
-    # @command = ""
+    file = FileHandler.new
+    entries = file.entries
     @printer = MessagePrinter.new(output_stream)
-  #  @repository = Repository.new
+    @repository = Repository.new(entries)
   end
 
   def start
     printer.intro
     until finished?
       printer.command_request
-      # @command = gets.strip.downcase
       process_command(gets)
     end
     printer.ending
@@ -26,11 +27,15 @@ class CLI
     case
     when load?
       @repository = Repository.load_entries('./data')
-      # printer.loaded_entries(repository.entries.count)
       printer.loaded
+    when queue_count
+      count = @repository.results_count
+      printer.results_count(count)
+    when queue_clear
+      @repository.results_clear
+      printer.results_clear
     when help?
       printer.help
-      #this always prints the initial help message - I think that's ok.
       help_additional_options
     else
       printer.not_a_valid_command
@@ -38,7 +43,7 @@ class CLI
     end
   end
 
-  private
+#  private
 
   def help_additional_options
     case
@@ -60,8 +65,18 @@ class CLI
   end
   #refactor
 
+
   def load?
     command == "l" || command == "load"
+  end
+
+  def queue_clear
+    command == "a"
+  end
+
+  def queue_count
+    command == "c"
+    #"queue count" not working
   end
 
   def help?
@@ -97,7 +112,7 @@ class CLI
   end
 
   def finished?
-    command == "q" || command == "quit"
+    command == "x" || command == "exit"
   end
 
 end

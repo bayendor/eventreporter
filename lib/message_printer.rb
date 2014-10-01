@@ -40,8 +40,8 @@ class MessagePrinter
 
   def help_find
     @output_stream.puts ".....FIND: To use the find command, simply type 'FIND [category] [entry]'.
-    Choose from the following categories: regdate, first_name, last_name, email_address, phone_number, street, city, state or zipcode.
-    An entry would be information like Colorado or 63130.
+    Choose from the following categories: first_name, last_name, email_address, phone_number, street, city, state or zipcode.
+    An entry would be information like Massachusetts or 63130.
     Ex. FIND FIRST_NAME IGOR would return all file listings that include gentlemen with the first name Igor."
   end
 

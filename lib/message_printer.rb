@@ -18,26 +18,73 @@ class MessagePrinter
     print "Enter your command: "
   end
 
-  def igor_help
-    @output_stream.puts "Intro to basic help... Will be expanded later. Ex. Search [help] [topic]..."
+  def loaded
+    @output_stream.puts "#{@repository} is now loaded."
+  end
+
+  def results
+    @output_stream.puts "Your search returned X results:"
+  end
+
+  def results_cleared
+    @output_stream.puts "The queue has been cleared."
+  end
+
+  def results_count
+    @output_stream.puts "There are X results in the queue."
+  end
+
+  def help
+    @output_stream.puts "Choose from the following help topics: find, load, queue, queue clear, queue count, queue print, save. You may type 'Help [topic]' at anytime."
+  end
+
+  def help_find
+    @output_stream.puts ".....FIND: To use the find command, simply type 'FIND [category] [entry]'.
+    Choose from the following categories: regdate, first_name, last_name, email_address, phone_number, street, city, state or zipcode.
+    An entry would be information like Colorado or 63130.
+    Ex. FIND FIRST_NAME IGOR would return all file listings that include gentlemen with the first name Igor."
+  end
+
+  def help_load
+    @output_stream.puts ".....LOAD: To load a file..."
+  end
+
+  def help_queue
+    @output_stream.puts ".....QUEUE: So you need help with the queue, eh? Let's talk..."
+  end
+
+  def help_queue_clear
+    @output_stream.puts ".....QUEUE CLEAR: Info about clearing the queue..."
+  end
+
+  def help_queue_count
+    @output_stream.puts ".....QUEUE COUNT: Info about the queue count..."
+  end
+
+  def help_queue_print
+    @output_stream.puts ".....QUEUE PRINT: Info about printing your queue..."
+  end
+
+  def help_save
+    @output_stream.puts ".....SAVE: Info about saving..."
   end
 
   def ending
     @output_stream.puts "Goodbye."
   end
 
-  def igor_intro
-    @output_stream.puts "Use Entry Reporter to do blah blah blah..."
+  def repo_intro
+    @output_stream.puts "Use Event Reporter to do blah blah blah..."
   end
 
-  def igor_quit
+  def repo_quit
     @output_stream.puts "Exiting queue."
     program_instructions
   end
 
   def not_a_valid_command
     if command = "q" || "quit"
-      @output_stream.puts "Thanks for using Event Manager."
+      @output_stream.puts "Thanks for using Event Reporter."
       exit
     else
       @output_stream.puts "That's not a valid command."

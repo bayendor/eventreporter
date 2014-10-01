@@ -5,7 +5,6 @@ require 'stringio'
 
 class CliTest < Minitest::Test
   def test_happy_path
-    skip
     output_stream = StringIO.new
     cli = CLI.new(output_stream)
 

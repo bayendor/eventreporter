@@ -7,6 +7,7 @@ class CLI
   def initialize(output_stream)
     # @command = ""
     @printer = MessagePrinter.new(output_stream)
+  #  @repository = Repository.new
   end
 
   def start
@@ -14,14 +15,14 @@ class CLI
     until finished?
       printer.command_request
       # @command = gets.strip.downcase
-      @input = gets.strip.downcase.split(" ")
-      @command = @input[0]
-      process_command
+      process_command(gets)
     end
     printer.ending
   end
 
-  def process_command
+  def process_command(input)
+    @input = input.strip.downcase.split(" ")
+    @command = @input[0]
     case
     when load?
       @repository = Repository.load_entries('./data')

@@ -18,19 +18,20 @@ class CliTest < Minitest::Test
     # queue count should return 0
 
     # help should list the commands
-    refute_includes output_stream.string, "help"
-    cli.process_command "help"
-    assert_includes output_stream.string, "help"
+    skip
+    refute_includes output_stream.string, 'help'
+    cli.process_command 'help'
+    assert_includes output_stream.string, 'help'
 
     # help queue count should explain the queue count function
-    refute_includes output_stream.string, "help queue count"
-    cli.process_command "help queue count"
-    assert_includes output_stream.string, "queue count"
+    refute_includes output_stream.string, 'help queue count'
+    cli.process_command 'help queue count'
+    assert_includes output_stream.string, 'queue count'
 
     # help queue count should explain the queue print function
-    refute_includes output_stream.string, "help queue print"
-    cli.process_command "help queue count"
-    assert_includes output_stream.string, "queue print"
+    refute_includes output_stream.string, 'help queue print'
+    cli.process_command 'help queue count'
+    assert_includes output_stream.string, 'queue print'
   end
 
   def test_printing
@@ -71,7 +72,7 @@ class CliTest < Minitest::Test
 
   def test_emptiness
     skip
-    #Note that this set intentionally has no call to load:
+    # Note that this set intentionally has no call to load:
     # find last_name Johnson
     # queue count should return 0
     # queue print should not print any attendee data
@@ -80,5 +81,4 @@ class CliTest < Minitest::Test
     # queue save to empty.csv should output a file with only headers
     # queue count should return 0
   end
-
 end

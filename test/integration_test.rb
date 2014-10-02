@@ -4,7 +4,7 @@ require_relative '../lib/file_handler'
 
 class IntegrationTest < Minitest::Test
   def test_lookup_by_last_name
-    handler = FileHandler.new('data', 'event_test.csv')
+    handler = FileHandler.new('event_test.csv')
     entries = handler.entries
     repo = Repository.new(entries)
 
@@ -13,7 +13,7 @@ class IntegrationTest < Minitest::Test
   end
 
   def test_lookup_by_zip_code
-    handler = FileHandler.new('data', 'event_test.csv')
+    handler = FileHandler.new('event_test.csv')
     entries = handler.entries
     repo = Repository.new(entries)
 
@@ -22,14 +22,14 @@ class IntegrationTest < Minitest::Test
   end
 
   def test_initial_repo_count
-    handler = FileHandler.new('data', 'event_test.csv')
+    handler = FileHandler.new('event_test.csv')
     entries = handler.entries
     repo = Repository.new(entries)
     assert_equal 0, repo.results_count
   end
 
   def test_count_after_lookup
-    handler = FileHandler.new('data', 'event_test.csv')
+    handler = FileHandler.new('event_test.csv')
     entries = handler.entries
     repo = Repository.new(entries)
 
@@ -38,7 +38,7 @@ class IntegrationTest < Minitest::Test
   end
 
   def test_count_after_lookup_and_reset
-    handler = FileHandler.new('data', 'event_test.csv')
+    handler = FileHandler.new('event_test.csv')
     entries = handler.entries
     repo = Repository.new(entries)
 

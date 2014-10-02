@@ -158,6 +158,10 @@ class CLI
     end
   end
 
+  def save
+    command == 'save'
+  end
+
   def finished?
     command == "q" || command == "quit"
   end

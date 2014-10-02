@@ -25,6 +25,7 @@ class Repository
   end
 
   def results_print
-
+    printout = PrintOut.new(results)
+    printout.print_results
   end
 end

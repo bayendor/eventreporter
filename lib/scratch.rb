@@ -1,15 +1,16 @@
-string ="here is a string"
-
-string.upcase
-
-string.send(:upcase) # => "HERE IS A STRING"
-
-attribute = "first_name"
-
-value = "jean"
+require 'terminal-table'
 
 
+rows = []
+rows << ['One', 1]
+rows << ['Two', 2]
+rows << ['Three', 3]
+table = Terminal::Table.new :rows => rows
 
-entries = %w( jean john alex david )
-
-# entries.select { |entry| entry.send(attribute.to_sym) == value }
+puts table
+#
+# +-------+---+
+# | One   | 1 |
+# | Two   | 2 |
+# | Three | 3 |
+# +-------+---+

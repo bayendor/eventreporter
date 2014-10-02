@@ -26,11 +26,6 @@ class Repository
     @results.sort! { |a, b| a.send(criteria.to_sym) <=> b.send(criteria.to_sym) }
   end
 
-  def results_print
-    printout = Printout.new(results)
-    printout.create_printout
-  end
-
   def print_results
       tp @results
   end

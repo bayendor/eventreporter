@@ -107,11 +107,6 @@ class CLI
     @input == ["queue", "count"]
   end
 
-  # def queue_sort
-  #   @input == ["queue", "sort"]
-  #   #when is this used?
-  # end
-
   def queue_print
     @input == ["queue", "print"]
   end

@@ -81,15 +81,6 @@ class MessagePrinter
     @output_stream.puts "Thanks for using Event Reporter. Goodbye."
   end
 
-  # def repo_intro
-  #   @output_stream.puts "Use Event Reporter to do blah blah blah..."
-  # end
-  #
-  # def repo_quit
-  #   @output_stream.puts "Exiting queue."
-  #   program_instructions
-  # end
-
   def not_a_valid_command_message
     @output_stream.puts "That's not a valid command. Please try again. You may ask for (h)elp at any time."
   end

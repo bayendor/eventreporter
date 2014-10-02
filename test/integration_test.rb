@@ -21,6 +21,15 @@ class IntegrationTest < Minitest::Test
     assert_equal 2, repo.results_count
   end
 
+  def test_lookup_by_state
+    handler = FileHandler.new('event_test.csv')
+    entries = handler.entries
+    repo = Repository.new(entries)
+
+    repo.find_by('state', 'DC').sort_by { |e| e.zipcode }
+    assert_equal 2, repo.results_count
+  end
+
   def test_initial_repo_count
     handler = FileHandler.new('event_test.csv')
     entries = handler.entries

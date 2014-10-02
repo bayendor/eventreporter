@@ -12,7 +12,7 @@ class FileHandler
 
   def save_file(results, file)
     CSV.open("data/#{file}", 'w') do |csv|
-      column_names = %w( id regdate first_name last_name email_addres  s
+      column_names = %w( id regdate first_name last_name email_address
                          homephone street city state zipcode )
       csv << column_names
       results.each do |_result|

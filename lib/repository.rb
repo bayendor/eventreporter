@@ -1,4 +1,5 @@
 require_relative 'file_handler'
+require 'table_print'
 
 class Repository
   attr_reader :entries, :results, :rows
@@ -31,14 +32,6 @@ class Repository
   end
 
   def print_results
-    results.each do |result|
-      @rows << [result.first_name,
-                result.last_name,
-                result.email_address,
-                result.zipcode,
-                result.city,
-                result.state,
-                result.phone_number]
-    end
+      tp @results
   end
 end

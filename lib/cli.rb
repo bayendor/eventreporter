@@ -22,8 +22,8 @@ class CLI
   end
 
   def process_command
-    @input = gets.strip.downcase.split(" ")
-    @command = @input[0]
+    @input = gets.strip.split(" ")
+    @command = @input[0].downcase
     case
     when load?
       if @input.length > 1
@@ -32,8 +32,8 @@ class CLI
         load_file
       end
     when queue_count
-      count = @repository.results_count
-      printer.results_count(count)
+      # count = @repository.results_count
+      printer.results_count(@repository.results_count)
     when queue_clear
       @repository.results_clear
       printer.results_clear
@@ -48,6 +48,13 @@ class CLI
         FileHandler.new.save_file(repository.results, @input.last)
       else
         printer.specify_filename
+      end
+    when find
+      if @input.length > 2
+        @repository.find_by(@input[1], @input[2])
+        printer.results(@repository.results_count)
+      else
+        printer.not_a_valid_command
       end
     else
       not_a_valid_command
@@ -155,6 +162,10 @@ class CLI
 
   def save
     command == 'save'
+  end
+
+  def find
+    command == 'find'
   end
 
 end

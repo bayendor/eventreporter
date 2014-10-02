@@ -27,7 +27,7 @@ class MessagePrinter
   end
 
   def results(count)
-    @output_stream.puts "Your search returned #{count} results:"
+    @output_stream.puts "Your search returned #{count} results."
   end
 
   def results_clear
@@ -95,7 +95,7 @@ class MessagePrinter
   end
 
   def specify_filename
-    @output_stream.puts 'Specify a filename'
+    @output_stream.puts 'Please specify a filename.'
   end
 
 end

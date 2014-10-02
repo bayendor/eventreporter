@@ -57,6 +57,12 @@ class CLI
       else
         printer.not_a_valid_command
       end
+    when queue_sort
+      if @input.length > 2
+        @repository.results_sort(@input.last)
+      else
+        printer.not_a_valid_command
+      end
     else
       not_a_valid_command
     end
@@ -162,6 +168,10 @@ class CLI
 
   def find
     command == 'find'
+  end
+
+  def queue_sort
+    @input[1] == 'print' && @input[2] == 'by'
   end
 
 end

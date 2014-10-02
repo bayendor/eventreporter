@@ -1,5 +1,4 @@
-require 'csv'
-require_relative 'entry'
+require_relative 'file_handler'
 
 class Repository
   attr_reader :entries, :results
@@ -22,7 +21,7 @@ class Repository
   end
 
   def results_sort(criteria)
-
+    @results.sort_by { |result| result.send(criteria.to_sym) }
   end
 
   def results_print

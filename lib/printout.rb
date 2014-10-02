@@ -1,6 +1,6 @@
 require 'terminal-table'
 
-class PrintOut
+class Printout
   attr_reader :results
 
   def initialize(results)
@@ -18,11 +18,11 @@ class PrintOut
     results.each do |result|
       @rows << [result.first_name,
                 result.last_name,
-                result.email,
+                result.email_address,
                 result.zipcode,
                 result.city,
                 result.state,
-                result.homephone]
+                result.phone_number]
     end
   end
 end

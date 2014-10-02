@@ -1,15 +1,27 @@
-string ="here is a string"
+require 'terminal-table'
 
-string.upcase
+rows = []
+rows << ['One', 1]
+rows << ['Two', 2]
+rows << ['Three', 3]
+table = Terminal::Table.new rows: rows
 
-string.send(:upcase) # => "HERE IS A STRING"
+puts table
+#
+# +-------+---+
+# | One   | 1 |
+# | Two   | 2 |
+# | Three | 3 |
+# +-------+---+
 
-attribute = "first_name"
+# File Load Logic
 
-value = "jean"
-
-
-
-entries = %w( jean john alex david )
-
-# entries.select { |entry| entry.send(attribute.to_sym) == value }
+def load_file(file = 'event_attendees.csv')
+  if File.exist?("./data/#{file}")
+    data = FileHandler.new(file)
+    @repository = Repository.new(data.entries)
+    printer.loaded
+  else
+    printer.file_not_found
+  end
+end

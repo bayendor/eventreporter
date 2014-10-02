@@ -58,8 +58,7 @@ class CLI
         printer.not_a_valid_command
       end
     when queue_sort
-      if @input.length > 1
-        puts @input.last
+      if @input.length > 2
         @repository.results_sort(@input.last)
       else
         printer.not_a_valid_command
@@ -177,7 +176,7 @@ class CLI
   end
 
   def queue_sort
-    @input == ["queue", "print", "by"]
+    @input[1] == 'print' && @input[2] == 'by'
   end
 
 end

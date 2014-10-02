@@ -34,6 +34,7 @@ class CliTest < Minitest::Test
   end
 
   def test_printing
+    skip
     # load
     # queue count should return 0
     # find first_name John
@@ -44,6 +45,7 @@ class CliTest < Minitest::Test
   end
 
   def test_saving
+    skip
     # load
     # find city Salt Lake City
     # queue print should display 13 attendees
@@ -56,6 +58,7 @@ class CliTest < Minitest::Test
   end
 
   def test_reading_data
+    skip
     # load
     # find state MD
     # queue save to state_sample.csv
@@ -67,6 +70,7 @@ class CliTest < Minitest::Test
   end
 
   def test_emptiness
+    skip
     #Note that this set intentionally has no call to load:
     # find last_name Johnson
     # queue count should return 0

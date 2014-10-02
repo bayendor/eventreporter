@@ -26,7 +26,11 @@ class CLI
     @command = @input[0]
     case
     when load?
-      load_file(file)
+      if @input.length > 1
+        load_file(@input[1])
+      else
+        load_file
+      end
     when queue_count
       count = @repository.results_count
       printer.results_count(count)
@@ -39,6 +43,12 @@ class CLI
     when help?
       printer.help
       help_additional_options
+    when save
+      if @input.length > 1
+        FileHandler.new.save_file(repository.results, @input.last)
+      else
+        printer.specify_filename
+      end
     else
       not_a_valid_command
     end
@@ -75,7 +85,7 @@ class CLI
     if File.exist?("./data/#{file}")
       data = FileHandler.new(file)
       @repository = Repository.new(data.entries)
-      printer.loaded
+      printer.loaded(file)
     else
       printer.file_not_found
     end
@@ -141,6 +151,10 @@ class CLI
 
   def finished?
     command == "q" || command == "quit"
+  end
+
+  def save
+    command == 'save'
   end
 
 end

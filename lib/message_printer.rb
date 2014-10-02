@@ -94,4 +94,8 @@ class MessagePrinter
     @output_stream.puts "That's not a valid command. Please try again. You may ask for (h)elp at any time."
   end
 
+  def specify_filename
+    @output_stream.puts 'Specify a filename'
+  end
+
 end

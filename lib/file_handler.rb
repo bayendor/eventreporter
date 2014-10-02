@@ -9,4 +9,15 @@ class FileHandler
     data = CSV.open(file, headers: true, header_converters: :symbol)
     @entries = data.collect { |row| Entry.new(row) }
   end
+
+  def save_file(results, file)
+		CSV.open("data/#{file}", "w") do |csv|
+      column_names = %w( id regdate first_name last_name email_address
+                         homephone street city state zipcode )
+			csv << column_names
+			results.each do |result|
+				csv << results.values_at(*column_names)
+			end
+		end
+	end
 end

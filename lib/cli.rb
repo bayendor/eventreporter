@@ -1,44 +1,50 @@
 require_relative 'message_printer'
 require_relative 'repository'
+require_relative 'file_handler'
 
 class CLI
-  attr_reader :command, :printer, :repository, :input
+  attr_reader :command, :printer, :repository, :input, :file
 
   def initialize(output_stream)
-    # @command = ""
+    @file = FileHandler.new
+    entries = file.entries
     @printer = MessagePrinter.new(output_stream)
-  #  @repository = Repository.new
+    @repository = Repository.new(entries)
   end
 
   def start
     printer.intro
     until finished?
       printer.command_request
-      # @command = gets.strip.downcase
-      process_command(gets)
+      process_command
     end
     printer.ending
   end
 
-  def process_command(input)
-    @input = input.strip.downcase.split(" ")
+  def process_command
+    @input = gets.strip.downcase.split(" ")
     @command = @input[0]
     case
     when load?
-      @repository = Repository.load_entries('./data')
-      # printer.loaded_entries(repository.entries.count)
-      printer.loaded
+      load_file(file)
+    when queue_count
+      count = @repository.results_count
+      printer.results_count(count)
+    when queue_clear
+      @repository.results_clear
+      printer.results_clear
+    when queue_print
+      @repository.results_print
+      printer.results_print
     when help?
       printer.help
-      #this always prints the initial help message - I think that's ok.
       help_additional_options
     else
-      printer.not_a_valid_command
-      #this isn't working... why?
+      not_a_valid_command
     end
   end
 
-  private
+#  private
 
   def help_additional_options
     case
@@ -60,8 +66,36 @@ class CLI
   end
   #refactor
 
+
   def load?
     command == "l" || command == "load"
+  end
+
+  def load_file(file="event_attendees.csv")
+    if File.exist?("./data/#{file}")
+      data = FileHandler.new(file)
+      @repository = Repository.new(data.entries)
+      printer.loaded
+    else
+      printer.file_not_found
+    end
+  end
+
+  def queue_clear
+    @input == ["queue", "clear"]
+  end
+
+  def queue_count
+    @input == ["queue", "count"]
+  end
+
+  # def queue_sort
+  #   @input == ["queue", "sort"]
+  #   #when is this used?
+  # end
+
+  def queue_print
+    @input == ["queue", "print"]
   end
 
   def help?
@@ -94,6 +128,15 @@ class CLI
 
   def help_save?
     @input == ["help", "save"]
+  end
+
+  def not_a_valid_command
+    if command == "q" || command == "quit"
+      printer.ending
+      exit
+    else
+      printer.not_a_valid_command_message
+    end
   end
 
   def finished?

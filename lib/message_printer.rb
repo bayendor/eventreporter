@@ -18,20 +18,28 @@ class MessagePrinter
     print "Enter your command: "
   end
 
-  def loaded
-    @output_stream.puts "#{@repository} is now loaded."
+  def loaded(file)
+    @output_stream.puts "#{file} is now loaded."
   end
 
-  def results
-    @output_stream.puts "Your search returned X results:"
+  def file_not_found
+    @output_stream.puts "File not found."
   end
 
-  def results_cleared
+  def results(count)
+    @output_stream.puts "Your search returned #{count} results:"
+  end
+
+  def results_clear
     @output_stream.puts "The queue has been cleared."
   end
 
-  def results_count
-    @output_stream.puts "There are X results in the queue."
+  def results_count(count)
+    @output_stream.puts "There are #{count} results in the queue."
+  end
+
+  def results_print
+    @output_stream.puts "Your results:"
   end
 
   def help
@@ -46,7 +54,7 @@ class MessagePrinter
   end
 
   def help_load
-    @output_stream.puts ".....LOAD: To load a file..."
+    @output_stream.puts ".....LOAD: To load a file, type 'LOAD [filename]'. Ex. LOAD EVENT_ATTENDEES.CSV"
   end
 
   def help_queue
@@ -70,25 +78,20 @@ class MessagePrinter
   end
 
   def ending
-    @output_stream.puts "Goodbye."
+    @output_stream.puts "Thanks for using Event Reporter. Goodbye."
   end
 
-  def repo_intro
-    @output_stream.puts "Use Event Reporter to do blah blah blah..."
-  end
+  # def repo_intro
+  #   @output_stream.puts "Use Event Reporter to do blah blah blah..."
+  # end
+  #
+  # def repo_quit
+  #   @output_stream.puts "Exiting queue."
+  #   program_instructions
+  # end
 
-  def repo_quit
-    @output_stream.puts "Exiting queue."
-    program_instructions
-  end
-
-  def not_a_valid_command
-    if command = "q" || "quit"
-      @output_stream.puts "Thanks for using Event Reporter."
-      exit
-    else
-      @output_stream.puts "That's not a valid command."
-    end
+  def not_a_valid_command_message
+    @output_stream.puts "That's not a valid command. Please try again. You may ask for (h)elp at any time."
   end
 
 end

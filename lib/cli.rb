@@ -38,8 +38,8 @@ class CLI
       @repository.results_clear
       printer.results_clear
     when queue_print
-      @repository.results_print
       printer.results_print
+      @repository.print_results
     when help?
       printer.help
       help_additional_options

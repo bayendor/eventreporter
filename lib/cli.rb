@@ -51,7 +51,8 @@ class CLI
       end
     when find
       if @input.length > 2
-        @repository.find_by(@input[1], @input[2])
+        value = input[2..input.length].join(" ")
+        @repository.find_by(@input[1], value)
         printer.results(@repository.results_count)
       else
         printer.not_a_valid_command

@@ -18,7 +18,6 @@ class CliTest < Minitest::Test
     # queue count should return 0
 
     # help should list the commands
-    skip
     refute_includes output_stream.string, 'help'
     cli.process_command 'help'
     assert_includes output_stream.string, 'help'

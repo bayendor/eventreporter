@@ -5,32 +5,37 @@ require 'stringio'
 
 class CliTest < Minitest::Test
   def test_happy_path
-    output_stream = StringIO.new
-    cli = CLI.new(output_stream)
+    # output_stream = StringIO.new
+    # cli = CLI.new(output_stream)
+    handler = FileHandler.new('event_attendees.csv')
+    entries = handler.entries
+    repo = Repository.new(entries)
 
     # load event_attendees.csv
     # cli.process_command "load event_attendees.csv"
-
     # queue count should return 0
+
     # find first_name John
+    repo.find_by('first_name', 'John').sort_by { |e| e.last_name }
+    assert_equal 62, repo.results_count
     # queue count should return 63
     # queue clear
     # queue count should return 0
 
     # help should list the commands
-    refute_includes output_stream.string, 'help'
-    cli.process_command 'help'
-    assert_includes output_stream.string, 'help'
+    # refute_includes output_stream.string, 'help'
+    # cli.process_command 'help'
+    # assert_includes output_stream.string, 'help'
 
     # help queue count should explain the queue count function
-    refute_includes output_stream.string, 'help queue count'
-    cli.process_command 'help queue count'
-    assert_includes output_stream.string, 'queue count'
+    # refute_includes output_stream.string, 'help queue count'
+    # cli.process_command 'help queue count'
+    # assert_includes output_stream.string, 'queue count'
 
     # help queue count should explain the queue print function
-    refute_includes output_stream.string, 'help queue print'
-    cli.process_command 'help queue count'
-    assert_includes output_stream.string, 'queue print'
+    # refute_includes output_stream.string, 'help queue print'
+    # cli.process_command 'help queue count'
+    # assert_includes output_stream.string, 'queue print'
   end
 
   def test_printing

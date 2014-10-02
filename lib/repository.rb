@@ -27,6 +27,6 @@ class Repository
   end
 
   def print_results
-      tp @results
+    tp @results
   end
 end

@@ -15,10 +15,8 @@ class FileHandler
       column_names = %w( regdate first_name last_name email_address phone_number street city state zipcode )
       csv << column_names
       results.each do |result|
+        csv << column_names.collect { |col| result.send(col) }
         # csv << results.values_at(*column_names)
-        csv << [ result.regdate, result.first_name,
-                 result.last_name, result.email_address, result.phone_number,
-                 result.street, result.city, result.state, result.zipcode ]
       end
     end
   end

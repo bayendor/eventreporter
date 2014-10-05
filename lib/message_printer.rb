@@ -1,21 +1,21 @@
 require './lib/repository'
-#?
+# ?
 class MessagePrinter
   def initialize(output_stream)
     @output_stream = output_stream
   end
 
   def intro
-    @output_stream.puts "Welcome to Event Reporter."
+    @output_stream.puts 'Welcome to Event Reporter.'
     program_instructions
   end
 
   def program_instructions
-    @output_stream.puts "Would you like to (l)oad a file, ask for (h)elp, or (q)uit?"
+    @output_stream.puts 'Would you like to (l)oad a file, ask for (h)elp, or (q)uit?'
   end
 
   def command_request
-    print "Enter your command: "
+    print 'Enter your command: '
   end
 
   def loaded(file)
@@ -23,7 +23,7 @@ class MessagePrinter
   end
 
   def file_not_found
-    @output_stream.puts "File not found."
+    @output_stream.puts 'File not found.'
   end
 
   def results(count)
@@ -31,7 +31,7 @@ class MessagePrinter
   end
 
   def results_clear
-    @output_stream.puts "The queue has been cleared."
+    @output_stream.puts 'The queue has been cleared.'
   end
 
   def results_count(count)
@@ -39,7 +39,7 @@ class MessagePrinter
   end
 
   def results_print
-    @output_stream.puts "Your results:"
+    @output_stream.puts 'Your results:'
   end
 
   def help
@@ -62,23 +62,23 @@ class MessagePrinter
   end
 
   def help_queue_clear
-    @output_stream.puts ".....QUEUE CLEAR: Info about clearing the queue..."
+    @output_stream.puts '.....QUEUE CLEAR: Info about clearing the queue...'
   end
 
   def help_queue_count
-    @output_stream.puts ".....QUEUE COUNT: Info about the queue count..."
+    @output_stream.puts '.....QUEUE COUNT: Info about the queue count...'
   end
 
   def help_queue_print
-    @output_stream.puts ".....QUEUE PRINT: Info about printing your queue..."
+    @output_stream.puts '.....QUEUE PRINT: Info about printing your queue...'
   end
 
   def help_save
-    @output_stream.puts ".....SAVE: Info about saving..."
+    @output_stream.puts '.....SAVE: Info about saving...'
   end
 
   def ending
-    @output_stream.puts "Thanks for using Event Reporter. Goodbye."
+    @output_stream.puts 'Thanks for using Event Reporter. Goodbye.'
   end
 
   def not_a_valid_command_message
@@ -88,5 +88,4 @@ class MessagePrinter
   def specify_filename
     @output_stream.puts 'Please specify a filename.'
   end
-
 end

@@ -7,9 +7,8 @@ class CLI
 
   def initialize(output_stream)
     @file = FileHandler.new
-    entries = file.entries
     @printer = MessagePrinter.new(output_stream)
-    @repository = Repository.new(entries)
+    @repository = Repository.new(file.entries)
   end
 
   def start
@@ -22,7 +21,7 @@ class CLI
   end
 
   def process_command
-    @input = gets.strip.split(" ")
+    @input = gets.strip.split(' ')
     @command = @input[0].downcase
     case
     when load?
@@ -32,7 +31,6 @@ class CLI
         load_file
       end
     when queue_count
-      # count = @repository.results_count
       printer.results_count(@repository.results_count)
     when queue_clear
       @repository.results_clear
@@ -51,7 +49,7 @@ class CLI
       end
     when find
       if @input.length > 2
-        value = input[2..input.length].join(" ")
+        value = input[2..input.length].join(' ')
         @repository.find_by(@input[1], value)
         printer.results(@repository.results_count)
       else
@@ -68,34 +66,30 @@ class CLI
     end
   end
 
-#  private
-
   def help_additional_options
     case
     when help_find?
-       printer.help_find
+      printer.help_find
     when help_load?
-     printer.help_load
+      printer.help_load
     when help_queue?
-     printer.help_queue
+      printer.help_queue
     when help_queue_clear?
       printer.help_queue_clear
     when help_queue_count?
-     printer.help_queue_count
+      printer.help_queue_count
     when help_queue_print?
       printer.help_queue_print
     when help_save?
       printer.help_save
     end
   end
-  #refactor
-
 
   def load?
-    command == "l" || command == "load"
+    command == 'l' || command == 'load'
   end
 
-  def load_file(file="event_attendees.csv")
+  def load_file(file = 'event_attendees.csv')
     if File.exist?("./data/#{file}")
       data = FileHandler.new(file)
       @repository = Repository.new(data.entries)
@@ -106,51 +100,51 @@ class CLI
   end
 
   def queue_clear
-    @input == ["queue", "clear"]
+    @input == %w(queue clear)
   end
 
   def queue_count
-    @input == ["queue", "count"]
+    @input == %w(queue count)
   end
 
   def queue_print
-    @input == ["queue", "print"]
+    @input == %w(queue print)
   end
 
   def help?
-    command == "h" || command == "help"
+    command == 'h' || command == 'help'
   end
 
   def help_find?
-    @input == ["help", "find"]
+    @input == %w(help find)
   end
 
   def help_load?
-    @input == ["help", "load"]
+    @input == %w(help load)
   end
 
   def help_queue?
-    @input == ["help", "queue"]
+    @input == %w(help queue)
   end
 
   def help_queue_clear?
-    @input == ["help", "queue", "clear"]
+    @input == %w(help queue clear)
   end
 
   def help_queue_count?
-    @input == ["help", "queue", "count"]
+    @input == %w(help queue count)
   end
 
   def help_queue_print?
-    @input == ["help", "queue", "print"]
+    @input == %w(help queue print)
   end
 
   def help_save?
-    @input == ["help", "save"]
+    @input == %w(help save)
   end
 
   def not_a_valid_command
-    if command == "q" || command == "quit"
+    if finished?
       printer.ending
       exit
     else
@@ -163,7 +157,7 @@ class CLI
   end
 
   def finished?
-    command == "q" || command == "quit"
+    command == 'q' || command == 'quit'
   end
 
   def save
@@ -177,5 +171,4 @@ class CLI
   def queue_sort
     @input[1] == 'print' && @input[2] == 'by'
   end
-
 end

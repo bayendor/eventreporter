@@ -13,15 +13,12 @@ class CliTest < Minitest::Test
     assert_equal 0, repo.results_count
 
     # find first_name John
-    repo.find_by('first_name', 'John').sort_by { |e| e.last_name }
+    repo.find_by('first_name', 'John')
     assert_equal 62, repo.results_count
     # queue count should return 62
-    assert_equal 62, repo.results_count
-    # queue clear
     repo.results_clear
     assert_equal 0, repo.results_count
     # queue count should return 0
-    assert_equal 0, repo.results_count
 
     # help should list the commands
     # help queue count should explain the queue count function

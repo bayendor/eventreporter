@@ -16,7 +16,6 @@ class FileHandler
       csv << column_names
       results.each do |result|
         csv << column_names.collect { |col| result.send(col) }
-        # csv << results.values_at(*column_names)
       end
     end
   end

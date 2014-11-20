@@ -1,5 +1,5 @@
 require './lib/repository'
-# ?
+
 class MessagePrinter
   def initialize(output_stream)
     @output_stream = output_stream
